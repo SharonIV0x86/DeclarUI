@@ -1,0 +1,3 @@
+Window title="Login" width=400 height=300 {
+    Button text="Sign In"
+}

@@ -1,0 +1,6 @@
+Window {
+    VBox {
+        Button
+        Label
+    }
+}
