@@ -1,0 +1,3 @@
+Window title="Login" {
+    Button text="Sign In"
+}
