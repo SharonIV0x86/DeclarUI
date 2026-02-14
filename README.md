@@ -1,6 +1,18 @@
 # DeclarUI
 A Declarative UI Language Compiler for Generating C++ GUIs
 
+# Compiling
+1. Generate the lexer.
+```
+flex --c++ src/lexer/lexer.l 
+```
+
+2. Compile using the lexer.
+
+```
+g++ src/main.cpp src/lexer/lex.yy.cc -o declarui
+```
+
 # 1 Language Constructs
 ## 1.1 Components
 | Component   | Description                 |
