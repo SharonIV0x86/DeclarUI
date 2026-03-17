@@ -1,29 +1,27 @@
 #include <iostream>
-#include <fstream>
-#include <FlexLexer.h>
+#include "lexer/lexer_runner.h"
+#include "parser/parser_runner.h"
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
   if (argc < 2)
   {
-    std::cerr << "Usage: ./declarui <file>\n";
+    std::cout << "Usage: declarui <input_file>\n";
     return 1;
   }
 
-  std::ifstream file(argv[1]);
-  if (!file.is_open())
-  {
-    std::cerr << "Cannot open file\n";
-    return 1;
-  }
+  const char *inputFile = argv[1];
+  const char *tokenFile = "phase-outputs/Phase_1_Lexical_tokens.txt";
 
-  yyFlexLexer lexer(&file);
+  std::cout << "===== DeclarUI Compiler =====\n";
 
-  while (lexer.yylex() != 0)
-  {
-    // tokens are printed inside lexer rules
-  }
+  std::cout << "Phase 1: Lexical Analysis\n";
+  runLexer(inputFile, tokenFile);
+
+  std::cout << "Phase 2: Syntax Analysis\n";
+  runParser(tokenFile);
+
+  std::cout << "Compilation finished.\n";
 
   return 0;
 }
-int yyFlexLexer::yywrap() { return 1; }

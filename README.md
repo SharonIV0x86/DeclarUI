@@ -47,3 +47,19 @@ For hierarchy example see: [hierarchy-eample.d.ui](UI-examples/hierarchy-example
 | `Button`        | ❌ none                                         |
 | `Label`         | ❌ none                                         |
 | `TextField`     | ❌ none                                         |
+
+# 2 Compiling and Building
+From the root level of the project, follow below steps.
+### Step 1 Run the Lexical Analyzer
+> gcc -c src/lexer/lexer.c -o lexer.o
+### Step 2 Compile All the files
+> g++ -std=c++17 \
+src/main.cpp \
+lexer.o \
+src/lexer/lexer_runner.cpp \
+src/parser/parser.cpp \
+src/parser/parser_runner.cpp \
+-lfl \
+-o declarui
+
+After step 2, you can run the executable file that will be created in the root level of the project named as ``declarui``.
