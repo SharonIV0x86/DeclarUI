@@ -13,8 +13,6 @@ int main(int argc, char *argv[])
   const char *inputFile = argv[1];
   const char *tokenFile = "phase-outputs/Phase_1_Lexical_tokens.txt";
 
-  std::cout << "===== DeclarUI Compiler =====\n";
-
   std::cout << "Phase 1: Lexical Analysis\n";
   runLexer(inputFile, tokenFile);
 

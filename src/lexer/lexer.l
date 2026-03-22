@@ -7,7 +7,6 @@
 int line = 1;
 %}
 
-/* Rules */
 %%
 "Window"      { fprintf(yyout, "WINDOW\t-\t%d\n", line); }
 "Button"      { fprintf(yyout, "BUTTON\t-\t%d\n", line); }
