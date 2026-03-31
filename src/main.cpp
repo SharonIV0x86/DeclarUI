@@ -1,7 +1,8 @@
 #include <iostream>
 #include "lexer/lexer_runner.h"
+#include "semantic_analyzer/semantic_analyzer.h"
 #include "parser/parser_runner.h"
-
+#include "codegen/code_generator.h"
 int main(int argc, char *argv[])
 {
   if (argc < 2)
@@ -17,8 +18,17 @@ int main(int argc, char *argv[])
   runLexer(inputFile, tokenFile);
 
   std::cout << "Phase 2: Syntax Analysis\n";
-  runParser(tokenFile);
+  auto root = runParser(tokenFile);
 
+  // Phase 3
+  std::cout << "Phase 3: Semantic Analysis\n";
+  SemanticAnalyzer semantic;
+  semantic.analyze(root.get());
+
+  // Phase 4
+  std::cout << "Phase 4: Code Generation\n";
+  CodeGenerator codegen;
+  codegen.generate(root.get());
   std::cout << "Compilation finished.\n";
 
   return 0;

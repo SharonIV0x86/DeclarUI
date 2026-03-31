@@ -1,3 +1,10 @@
-Window title="Login" {
-    Button text="Sign In"
+Window title="Login" width="400" height="300" color="gray"{
+    VBox {
+        Label text="Welcome Back" color="black"
+
+        TextField placeholder="Username"
+        TextField placeholder="Password"
+
+        Button text="Sign In" color="green"
+    }
 }
