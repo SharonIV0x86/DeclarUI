@@ -59,6 +59,8 @@ lexer.o \
 src/lexer/lexer_runner.cpp \
 src/parser/parser.cpp \
 src/parser/parser_runner.cpp \
+src/semantic_analyzer/semantic_analyzer.cpp \
+src/codegen/code_generator.cpp \
 -lfl \
 -o declarui
 
