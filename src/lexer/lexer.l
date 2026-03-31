@@ -1,39 +1,38 @@
+%option noyywrap
+
 %{
-#include <iostream>
-#include "token.h"
+#include <stdio.h>
+#include <string.h>
 
 int line = 1;
 %}
 
 %%
+"Window"      { fprintf(yyout, "WINDOW\t-\t%d\n", line); }
+"Button"      { fprintf(yyout, "BUTTON\t-\t%d\n", line); }
+"Label"       { fprintf(yyout, "LABEL\t-\t%d\n", line); }
+"TextField"   { fprintf(yyout, "TEXTFIELD\t-\t%d\n", line); }
+"VBox"        { fprintf(yyout, "VBOX\t-\t%d\n", line); }
+"HBox"        { fprintf(yyout, "HBOX\t-\t%d\n", line); }
 
-"Window"      { std::cout << "WINDOW\n"; }
-"Button"      { std::cout << "BUTTON\n"; }
-"Label"       { std::cout << "LABEL\n"; }
-"TextField"   { std::cout << "TEXTFIELD\n"; }
-"VBox"        { std::cout << "VBOX\n"; }
-"HBox"        { std::cout << "HBOX\n"; }
+[0-9]+        { fprintf(yyout, "NUMBER\t%s\t%d\n", yytext, line); }
 
-[0-9]+        { std::cout << "NUMBER: " << yytext << "\n"; }
+\"([^"]*)\"   {
+    int len = yyleng;
+    if (len >= 2) {
+        fprintf(yyout, "STRING\t%.*s\t%d\n", len-2, yytext+1, line);
+    } else {
+        fprintf(yyout, "STRING\t\t%d\n", line);
+    }
+}
+"="           { fprintf(yyout, "ASSIGN\t=\t%d\n", line); }
+"{"           { fprintf(yyout, "LBRACE\t{\t%d\n", line); }
+"}"           { fprintf(yyout, "RBRACE\t}\t%d\n", line); }
 
-\"([^"]*)\"   { std::cout << "STRING: " << yytext << "\n"; }
+[a-zA-Z_][a-zA-Z0-9_]* { fprintf(yyout, "IDENTIFIER\t%s\t%d\n", yytext, line); }
 
-"="           { std::cout << "ASSIGN\n"; }
-"{"           { std::cout << "LBRACE\n"; }
-"}"           { std::cout << "RBRACE\n"; }
-
-[a-zA-Z_][a-zA-Z0-9_]* {
-                 std::cout << "IDENTIFIER: " << yytext << "\n";
-               }
-
-[ \t\r]+      ;   // ignore whitespace
-
+[ \t\r]+      ;   /* ignore whitespace */
 \n            { line++; }
 
-.             { std::cout << "INVALID: " << yytext << "\n"; }
-
+.             { fprintf(yyout, "INVALID\t%.*s\t%d\n", yyleng, yytext, line); }
 %%
-
-int yywrap() {
-    return 1;
-}
