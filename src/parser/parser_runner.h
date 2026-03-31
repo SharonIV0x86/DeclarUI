@@ -1,3 +1,4 @@
 #pragma once
-
-void runParser(const char *tokenFile);
+#include <memory>
+#include "../common/ast.h"
+std::unique_ptr<Component> runParser(const char *tokenFile);

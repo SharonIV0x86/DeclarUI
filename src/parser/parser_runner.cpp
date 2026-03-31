@@ -69,7 +69,7 @@ void printAST(const Component *node, std::ostream &out, int depth = 0)
     }
 }
 
-void runParser(const char *tokenFile)
+std::unique_ptr<Component> runParser(const char *tokenFile)
 {
     try
     {
@@ -83,9 +83,11 @@ void runParser(const char *tokenFile)
         printAST(root.get(), out);
 
         std::cout << "Parser completed. AST written to ast.txt\n";
+        return root;
     }
     catch (std::exception &e)
     {
         std::cerr << "Parser Error: " << e.what() << "\n";
     }
+    return nullptr;
 }

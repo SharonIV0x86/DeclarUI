@@ -1,3 +1,7 @@
 === AST ===
-Window { title=Login }
-  Button { text=Sign In }
+Window { color=gray height=300 title=Login width=400 }
+  VBox
+    Label { color=black text=Welcome Back }
+    TextField { placeholder=Username }
+    TextField { placeholder=Password }
+    Button { color=green text=Sign In }
