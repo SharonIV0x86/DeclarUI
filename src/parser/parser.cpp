@@ -21,14 +21,11 @@ bool Parser::match(TokenType type) {
 }
 
 void Parser::error(const std::string& msg) {
-    std::cerr << "Parser Error at line " << lookahead().line 
-              << ": " << msg << "\n";
+    std::cerr << "Parser Error: "<< msg << "\n";
     exit(1);
 }
 
-//////////////////////////////////////////////////////
-// P → C EOF
-//////////////////////////////////////////////////////
+// P → C $
 std::unique_ptr<Component> Parser::parseProgram() {
     auto root = parseC();
 
@@ -39,9 +36,7 @@ std::unique_ptr<Component> Parser::parseProgram() {
     return root;
 }
 
-//////////////////////////////////////////////////////
 // C → T L B
-//////////////////////////////////////////////////////
 std::unique_ptr<Component> Parser::parseC() {
     auto node = std::make_unique<Component>();
 
@@ -52,9 +47,7 @@ std::unique_ptr<Component> Parser::parseC() {
     return node;
 }
 
-//////////////////////////////////////////////////////
 // T → WINDOW | BUTTON | LABEL | TEXTFIELD | VBOX | HBOX
-//////////////////////////////////////////////////////
 std::string Parser::parseT() {
     Token t = lookahead();
 
@@ -71,9 +64,7 @@ std::string Parser::parseT() {
     return "";
 }
 
-//////////////////////////////////////////////////////
 // L → R L | ε
-//////////////////////////////////////////////////////
 void Parser::parseL(std::map<std::string,std::string>& props) {
     if (lookahead().type == TokenType::IDENTIFIER) {
         parseR(props);
@@ -81,9 +72,7 @@ void Parser::parseL(std::map<std::string,std::string>& props) {
     }
 }
 
-//////////////////////////////////////////////////////
 // R → IDENTIFIER = V
-//////////////////////////////////////////////////////
 void Parser::parseR(std::map<std::string,std::string>& props) {
     Token key = lookahead();
 
@@ -100,9 +89,7 @@ void Parser::parseR(std::map<std::string,std::string>& props) {
     props[key.lexeme] = value;
 }
 
-//////////////////////////////////////////////////////
 // V → STRING | NUMBER
-//////////////////////////////////////////////////////
 std::string Parser::parseV() {
     Token t = lookahead();
 
@@ -119,9 +106,7 @@ std::string Parser::parseV() {
     return "";
 }
 
-//////////////////////////////////////////////////////
 // B → { K } | ε
-//////////////////////////////////////////////////////
 void Parser::parseB(std::vector<std::unique_ptr<Component>>& children) {
     if (match(TokenType::LBRACE)) {
         parseK(children);
@@ -132,9 +117,7 @@ void Parser::parseB(std::vector<std::unique_ptr<Component>>& children) {
     }
 }
 
-//////////////////////////////////////////////////////
 // K → C K | ε
-//////////////////////////////////////////////////////
 void Parser::parseK(std::vector<std::unique_ptr<Component>>& children) {
     Token t = lookahead();
 

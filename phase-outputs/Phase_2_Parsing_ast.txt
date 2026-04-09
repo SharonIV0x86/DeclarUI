@@ -1,7 +1,22 @@
 === AST ===
-Window { color=gray height=300 title=Login width=400 }
+Window { color=#415132 height=500 title=Secure Login width=500 }
   VBox
-    Label { color=black text=Welcome Back }
-    TextField { placeholder=Username }
-    TextField { placeholder=Password }
-    Button { color=green text=Sign In }
+    Label { color=#ffffff text=Secure Access Portal }
+    Label { color=#bbbbbb text=Please login to continue }
+    VBox
+      Label { color=#ffffff text=Username }
+      TextField { placeholder=Enter your username }
+      Label { color=#ffffff text=Password }
+      TextField { placeholder=Enter your password }
+    HBox
+      Button { color=#00c853 text=Sign In }
+      Button { color=#ff5252 text=Reset }
+    VBox
+      Label { color=#888888 text=──────────── OR ──────────── }
+      HBox
+        Button { color=#4285F4 text=Login with Google }
+        Button { color=#ffffff text=Login with GitHub }
+    VBox
+      Label { color=#4fc3f7 text=Forgot Password? }
+      Label { color=#4fc3f7 text=Create New Account }
+    Label { color=#777777 text=© 2026 Unambigous Lexemes. All rights reserved. }

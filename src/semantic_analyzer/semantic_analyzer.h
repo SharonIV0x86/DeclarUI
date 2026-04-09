@@ -10,14 +10,14 @@ public:
 private:
     void validateComponent(const Component *node, bool isRoot);
 
-    // 🔹 Component validators
+    // Component validators
     void validateWindow(const Component *node, bool isRoot);
     void validateButton(const Component *node);
     void validateLabel(const Component *node);
     void validateTextField(const Component *node);
     void validateLayout(const Component *node);
 
-    // 🔹 Helpers
+    // Helpers
     void checkAllowedProperties(const Component *node,
                                 const std::set<std::string> &allowed);
 

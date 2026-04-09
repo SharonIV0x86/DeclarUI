@@ -3,9 +3,7 @@
 #include <set>
 #include <cctype>
 
-//////////////////////////////////////////////////////
 // CORE
-//////////////////////////////////////////////////////
 
 void SemanticAnalyzer::error(const std::string &msg)
 {
@@ -19,10 +17,7 @@ void SemanticAnalyzer::analyze(const Component *root)
     std::cout << "Semantic Analysis completed successfully.\n";
 }
 
-//////////////////////////////////////////////////////
 // DISPATCH
-//////////////////////////////////////////////////////
-
 void SemanticAnalyzer::validateComponent(const Component *node, bool isRoot)
 {
     if (node->type == "Window")
@@ -38,17 +33,14 @@ void SemanticAnalyzer::validateComponent(const Component *node, bool isRoot)
     else
         error("Unknown component: " + node->type);
 
-    // 🔹 Recurse
+    // Recurse
     for (auto &child : node->children)
     {
         validateComponent(child.get(), false);
     }
 }
 
-//////////////////////////////////////////////////////
 // COMPONENT VALIDATORS
-//////////////////////////////////////////////////////
-
 void SemanticAnalyzer::validateWindow(const Component *node, bool isRoot)
 {
     if (!isRoot)
@@ -88,12 +80,10 @@ void SemanticAnalyzer::validateTextField(const Component *node)
 void SemanticAnalyzer::validateLayout(const Component *node)
 {
     checkAllowedProperties(node, {});
-    // layouts can have children → no restriction here
+    // layouts can have children so no restriction here
 }
 
-//////////////////////////////////////////////////////
 // HELPERS
-//////////////////////////////////////////////////////
 
 void SemanticAnalyzer::checkAllowedProperties(
     const Component *node,
@@ -151,7 +141,6 @@ void SemanticAnalyzer::checkColor(const Component *node)
 
     std::string val = node->properties.at("color");
 
-    // very basic validation (you can expand later)
     if (val.empty())
     {
         error("color cannot be empty");

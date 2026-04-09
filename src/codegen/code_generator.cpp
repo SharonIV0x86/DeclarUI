@@ -1,10 +1,7 @@
 #include "code_generator.h"
 #include <iostream>
 
-//////////////////////////////////////////////////////
 // MAIN
-//////////////////////////////////////////////////////
-
 void CodeGenerator::generate(const Component *root)
 {
 
@@ -31,9 +28,7 @@ void CodeGenerator::generate(const Component *root)
     std::cout << "Code Generation completed.\n";
 }
 
-//////////////////////////////////////////////////////
 // DISPATCH
-//////////////////////////////////////////////////////
 
 GenResult CodeGenerator::generateComponent(const Component *node)
 {
@@ -55,9 +50,7 @@ GenResult CodeGenerator::generateComponent(const Component *node)
     exit(1);
 }
 
-//////////////////////////////////////////////////////
 // COMPONENT EMITTERS
-//////////////////////////////////////////////////////
 
 GenResult CodeGenerator::emitWindow(const Component *node)
 {
@@ -88,8 +81,6 @@ GenResult CodeGenerator::emitWindow(const Component *node)
     return {id, false}; // QWidget
 }
 
-//////////////////////////////////////////////////////
-
 GenResult CodeGenerator::emitButton(const Component *node)
 {
 
@@ -101,8 +92,6 @@ GenResult CodeGenerator::emitButton(const Component *node)
     emitColor(id, node);
     return {id, false};
 }
-
-//////////////////////////////////////////////////////
 
 GenResult CodeGenerator::emitLabel(const Component *node)
 {
@@ -116,8 +105,6 @@ GenResult CodeGenerator::emitLabel(const Component *node)
     return {id, false};
 }
 
-//////////////////////////////////////////////////////
-
 GenResult CodeGenerator::emitTextField(const Component *node)
 {
 
@@ -129,8 +116,6 @@ GenResult CodeGenerator::emitTextField(const Component *node)
 
     return {id, false};
 }
-
-//////////////////////////////////////////////////////
 
 GenResult CodeGenerator::emitVBox(const Component *node)
 {
@@ -152,8 +137,6 @@ GenResult CodeGenerator::emitVBox(const Component *node)
     return {id, true}; // Layout
 }
 
-//////////////////////////////////////////////////////
-
 GenResult CodeGenerator::emitHBox(const Component *node)
 {
 
@@ -174,9 +157,7 @@ GenResult CodeGenerator::emitHBox(const Component *node)
     return {id, true};
 }
 
-//////////////////////////////////////////////////////
 // PROPERTY EMITTERS
-//////////////////////////////////////////////////////
 
 void CodeGenerator::emitTitle(const std::string &id, const Component *node)
 {
@@ -188,8 +169,6 @@ void CodeGenerator::emitTitle(const std::string &id, const Component *node)
     }
 }
 
-//////////////////////////////////////////////////////
-
 void CodeGenerator::emitSize(const std::string &id, const Component *node)
 {
 
@@ -198,8 +177,6 @@ void CodeGenerator::emitSize(const std::string &id, const Component *node)
 
     out << "    " << id << "->resize(" << width << ", " << height << ");\n";
 }
-
-//////////////////////////////////////////////////////
 
 void CodeGenerator::emitText(const std::string &id, const Component *node)
 {
@@ -210,8 +187,6 @@ void CodeGenerator::emitText(const std::string &id, const Component *node)
             << node->properties.at("text") << "\");\n";
     }
 }
-
-//////////////////////////////////////////////////////
 
 void CodeGenerator::emitPlaceholder(const std::string &id, const Component *node)
 {
@@ -230,7 +205,6 @@ void CodeGenerator::emitColor(const std::string &id, const Component *node)
 
     std::string val = node->properties.at("color");
 
-    // 🔥 Special handling for Window (background)
     if (node->type == "Window")
     {
         out << "    " << id << "->setStyleSheet(\"background-color: "

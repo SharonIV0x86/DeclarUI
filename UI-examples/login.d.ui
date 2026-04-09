@@ -1,10 +1,40 @@
-Window title="Login" width="400" height="300" color="gray"{
+Window title="Secure Login" width="500" height="500" color="#415132" {
     VBox {
-        Label text="Welcome Back" color="black"
 
-        TextField placeholder="Username"
-        TextField placeholder="Password"
+        Label text="Secure Access Portal" color="#ffffff"
 
-        Button text="Sign In" color="green"
+        Label text="Please login to continue" color="#bbbbbb"
+
+        VBox {
+
+            Label text="Username" color="#ffffff"
+            TextField placeholder="Enter your username"
+
+            Label text="Password" color="#ffffff"
+            TextField placeholder="Enter your password"
+        }
+
+        HBox {
+            Button text="Sign In" color="#00c853"
+            Button text="Reset" color="#ff5252"
+        }
+
+        VBox {
+
+            Label text="──────────── OR ────────────" color="#888888"
+
+            HBox {
+                Button text="Login with Google" color="#4285F4"
+                Button text="Login with GitHub" color="#ffffff"
+            }
+        }
+
+        VBox {
+
+            Label text="Forgot Password?" color="#4fc3f7"
+            Label text="Create New Account" color="#4fc3f7"
+        }
+
+        Label text="© 2026 Unambigous Lexemes. All rights reserved." color="#777777"
     }
 }
