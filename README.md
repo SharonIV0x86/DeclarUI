@@ -12,7 +12,7 @@ flex --c++ src/lexer/lexer.l
 ```
 g++ src/main.cpp src/lexer/lex.yy.cc -o declarui
 ```
-
+ 
 # 1 Language Constructs
 ## 1.1 Components
 | Component   | Description                 |
